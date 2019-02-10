@@ -8,7 +8,10 @@ namespace JogoXadrez
     {
         static void Main(string[] args)
         {
-            try
+
+            PosicaoXadrez pos = new PosicaoXadrez('h',3);
+            Console.WriteLine(pos.ToPosicao());
+            /* try
             {
                 Tabuleiro tab = new Tabuleiro(8, 8);
 
@@ -24,7 +27,7 @@ namespace JogoXadrez
             }catch(TabuleiroExcpetion e)
             {
                 Console.WriteLine(e.Message);
-            }
+            }*/
         }
     }
 }
