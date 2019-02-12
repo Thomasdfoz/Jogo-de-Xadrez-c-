@@ -56,6 +56,8 @@ namespace JogoXadrez
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }
+
+            Console.WriteLine("ola");
         }
     }
 }
