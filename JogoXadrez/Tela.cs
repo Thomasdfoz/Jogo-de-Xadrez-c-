@@ -1,11 +1,53 @@
 ﻿using System;
 using tabuleiro;
 using xadrez;
+using System.Collections.Generic;
 
 namespace JogoXadrez
 {
     class Tela
     {
+        public static void ImprimirPartida(PartidaDeXadrez partida)
+        {
+            ImprimirTabuleiro(partida.tab);
+            Console.WriteLine();
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine();
+            Console.WriteLine("Turno: " + partida.turno);
+            Console.WriteLine($"Aguardando jogada: " + partida.JogadorAtual);
+            if (partida.xeque)
+            {
+                Console.WriteLine("XEQUE!!!");
+            }
+        }
+
+        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
+            Console.WriteLine("Peças capturadas: ");
+            Console.Write("Brancas: ");
+            Console.Write("[");
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+            Console.Write("]");
+            Console.WriteLine();
+            Console.Write("pretas: ");
+            Console.Write("[");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Black;
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+            Console.ForegroundColor = aux;  
+            Console.Write("]");
+            Console.WriteLine();
+
+        }
+
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
+            foreach (Peca x in conjunto)
+            {
+                Console.Write(" " + x + " ");
+            }
+        }
+
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
             for (int i = 0; i < tab.linhas; i++)
@@ -32,7 +74,7 @@ namespace JogoXadrez
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
-            
+
             for (int i = 0; i < tab.linhas; i++)
             {
                 ConsoleColor aux2 = Console.ForegroundColor;
@@ -55,7 +97,7 @@ namespace JogoXadrez
                     Console.BackgroundColor = fundoOriginal;
 
                 }
-                Console.WriteLine();                
+                Console.WriteLine();
             }
             ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkRed;
