@@ -47,8 +47,9 @@ namespace JogoXadrez
                     }
                 }
 
-                Tela.ImprimirTabuleiro(partida.tab);
-
+                Console.Clear();
+                Tela.ImprimirPartida(partida);
+                Console.ReadLine();
             }
             catch (TabuleiroExcpetion e)
             {
