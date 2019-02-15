@@ -2,59 +2,49 @@
 using tabuleiro;
 using xadrez;
 
-namespace JogoXadrez
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            try
-            {
+namespace xadrez_console {
+    class Program {
+        static void Main(string[] args) {
+
+            try {
                 PartidaDeXadrez partida = new PartidaDeXadrez();
 
-                while (!partida.terminada)
-                {
-                    try
-                    {
-                       
+                while (!partida.terminada) {
+
+                    try {
                         Console.Clear();
-                        Tela.ImprimirPartida(partida); 
+                        Tela.imprimirPartida(partida);
 
                         Console.WriteLine();
                         Console.Write("Origem: ");
-                        Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
-                        partida.ValidarPosicaoDeOrigem(origem);
+                        Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validarPosicaoDeOrigem(origem);
 
-                        bool[,] posicoesPossiveis = partida.tab.peca(origem).MovimentosPossiveis();
+                        bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
 
                         Console.Clear();
-                        Tela.ImprimirTabuleiro(partida.tab, posicoesPossiveis);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partida.turno);
-                        Console.WriteLine($"Aguardando jogada: " + partida.JogadorAtual);
+                        Tela.imprimirTabuleiro(partida.tab, posicoesPossiveis);
+
                         Console.WriteLine();
                         Console.Write("Destino: ");
-                        Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
-                        partida.ValidarPosiaoDeDestino(origem, destino);
+                        Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validarPosicaoDeDestino(origem, destino);
 
-
-                        partida.RealizaJogada(origem, destino);
+                        partida.realizaJogada(origem, destino);
                     }
-                    catch (TabuleiroExcpetion e)
-                    {
+                    catch (TabuleiroException e) {
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
                 }
-
                 Console.Clear();
-                Tela.ImprimirPartida(partida);
-                Console.ReadLine();
+                Tela.imprimirPartida(partida);
             }
-            catch (TabuleiroExcpetion e)
-            {
+            catch (TabuleiroException e) {
                 Console.WriteLine(e.Message);
             }
+
+            Console.ReadLine();
         }
     }
 }
